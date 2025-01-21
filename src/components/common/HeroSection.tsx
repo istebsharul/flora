@@ -16,8 +16,8 @@ function HeroSection() {
                     <h1 className="text-3xl md:text-3xl lg:text-4xl font-bold text-black">
                         Welcome to
                     </h1>
-                    <h1 className="text-[8rem] text-[#DD3344] font-arial-rounded md:leading-none leading-none">Flora</h1>
-                    <h2 className="md:text-[6rem] text-[4rem] font-black font-gabriola text-[#F9C126] text-shadow-custom italic leading-tight">
+                    <h1 className="text-[8rem] text-[#DD3344] font-nunito font-bold md:leading-none leading-none">Flora</h1>
+                    <h2 className="md:text-[6rem] text-[4rem] font-black font-gabriola text-[#F9C126] text-shadow-custom leading-tight">
                         Play School
                     </h2>
                     <p className="text-xl lg:text-4xl text-[#2747E2] font-palatino font-semibold">

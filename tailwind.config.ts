@@ -19,6 +19,7 @@ export default {
         'arial-rounded': ['"Arial Rounded MT Bold"', 'sans-serif'],
         'gabriola': ['Gabriola', 'serif'],
         'palatino': ['Palatino', 'serif'],
+        'nunito': ['Nunito', 'sans-serif'],
       },
       textShadow: {
         'custom': '2px 2px 4px rgba(0, 0, 0, 1)', // Adjust these values as needed

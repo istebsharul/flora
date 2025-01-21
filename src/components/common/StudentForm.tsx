@@ -1,4 +1,11 @@
+"use client"
 import { useState, useEffect, useRef } from "react";
+import toast from "react-hot-toast";
+import axios from "axios";
+import dotenv from 'dotenv';
+dotenv.config();
+
+const scriptURL = process.env.SCRIPT_URL;
 
 const StudentFormModal = ({ isOpen, closeModal }: { isOpen: boolean; closeModal: () => void }) => {
   const [name, setName] = useState("");
@@ -10,6 +17,7 @@ const StudentFormModal = ({ isOpen, closeModal }: { isOpen: boolean; closeModal:
 
   // Close modal if clicked outside
   useEffect(() => {
+    console.log(scriptURL);
     const handleClickOutside = (event: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
         closeModal();
@@ -25,11 +33,36 @@ const StudentFormModal = ({ isOpen, closeModal }: { isOpen: boolean; closeModal:
     };
   }, [isOpen, closeModal]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const formData = { name, selectedClass, phoneNumber, email };
-    console.log("Form Submitted:", formData);
-    closeModal(); // Close modal after submission
+  
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('class', selectedClass);
+    formData.append('phone', phoneNumber);
+    formData.append('email', email);
+  
+    if (!scriptURL) {
+      console.error("SCRIPT_URL is not defined");
+      toast.error("Submission failed: Missing script URL.");
+      return;
+    }
+  
+    // Using toast.promise for better user feedback
+    toast.promise(
+      axios.post(scriptURL, formData), // Axios request
+      {
+        loading: 'Processing...',
+        success: () => {
+          closeModal(); // Close modal after successful submission
+          return 'Thank you! We will contact you shortly.';
+        },
+        error: (err:any) => {
+          console.error("Error submitting form:", err);
+          return 'Could not save. Please try again later.';
+        },
+      }
+    );
   };
 
   if (!isOpen) return null;

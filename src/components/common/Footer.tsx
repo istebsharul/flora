@@ -65,7 +65,7 @@ const Footer = () => {
                                 Register
                             </button>
                             <a
-                                href='/prospectus.pdf'
+                                href='/flora_prospectus.pdf'
                                 download
                                 className='w-full py-2 px-8 flex justify-center items-center gap-2 rounded-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold'
                             >
