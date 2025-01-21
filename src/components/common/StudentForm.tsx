@@ -1,0 +1,107 @@
+import { useState, useEffect, useRef } from "react";
+
+const StudentFormModal = ({ isOpen, closeModal }: { isOpen: boolean; closeModal: () => void }) => {
+  const [name, setName] = useState("");
+  const [selectedClass, setSelectedClass] = useState("Montessori1");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  
+  const modalRef = useRef<HTMLDivElement>(null); // Ref for modal container
+
+  // Close modal if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        closeModal();
+      }
+    };
+    
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, closeModal]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const formData = { name, selectedClass, phoneNumber, email };
+    console.log("Form Submitted:", formData);
+    closeModal(); // Close modal after submission
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
+      <div
+        ref={modalRef}
+        className="relative bg-blue-50 p-8 rounded-xl shadow-lg w-96"
+      >
+        <h2 className="text-2xl font-bold mb-4 text-center text-red-500 mb-5">Student Registration</h2>
+        <form onSubmit={handleSubmit} className="space-y-4 rounded">
+          <div>
+            <label htmlFor="name" className="block ">Student Name</label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className="border px-4 py-2 w-full rounded-xl shadow-inner focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="class" className="block">Class</label>
+            <div className="relative">
+              <select
+                id="class"
+                value={selectedClass}
+                onChange={(e) => setSelectedClass(e.target.value)}
+                className="border px-4 py-3 w-full pr-16 rounded-xl shadow-inner focus:outline-none focus:ring-1 focus:ring-blue-500"
+              >
+                <option value="Montessori1">Montessori1 - 2.5-3.5 Yrs</option>
+                <option value="Montessori2">Montessori2 - 3.5-4.5 Yrs</option>
+                <option value="LKG">LKG - 4.5-5.5 Yrs</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="phoneNumber" className="block">Phone Number (Required)</label>
+            <input
+              type="text"
+              id="phoneNumber"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              required
+              className="border px-4 py-2 w-full rounded-xl shadow-inner focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="email" className="block">Email (Optional)</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="border px-4 py-2 w-full rounded-xl shadow-inner focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
+
+          <div className="flex justify-between items-center">
+            <button type="submit" className="w-full bg-blue-500 hover:bg-green-500 text-white px-4 py-2 rounded-full">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default StudentFormModal;
