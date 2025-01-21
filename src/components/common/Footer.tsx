@@ -16,7 +16,7 @@ const Footer = () => {
     return (
         <div id="footer" className='w-full'>
             <StudentFormModal isOpen={isModalOpen} closeModal={closeModal} />
-            <footer className='w-screen bg-purple-100 flex flex-col justify-center items-center divide-y divide-gray-200'>
+            <footer className='w-screen bg-purple-100 flex flex-col justify-center items-center'>
                 {/* Middle Section - Info & Links */}
                 <div className='w-4/6 text-gray-800 py-10 text-center lg:text-left'>
                     <div className='container flex md:flex-row flex-col flex-wrap justify-center lg:justify-between items-center'>
@@ -58,7 +58,7 @@ const Footer = () => {
                                 <IoIosCall />
                                 Call Now
                             </a>
-                            <button 
+                            <button
                                 onClick={openModal}
                                 className='w-full py-2 px-8 flex justify-center items-center gap-2 rounded-full bg-green-600 hover:bg-green-700 text-white font-bold'>
                                 <GiArchiveRegister />
@@ -78,6 +78,17 @@ const Footer = () => {
                 {/* Bottom Section - Social Media */}
                 <div className='text-gray-400 pb-2 text-center text-purple-900'>
                     &copy; 2025 <span className="font-semibold">Flora Play School</span>. All rights reserved.
+                    <span className="px-2">
+                        Build with 💜 by{' '}
+                        <a
+                            className="font-bold"
+                            href="https://www.ontopgroups.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Ontop Groups
+                        </a>
+                    </span>
                 </div>
             </footer>
         </div>
