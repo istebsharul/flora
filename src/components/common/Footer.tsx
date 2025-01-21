@@ -76,10 +76,9 @@ const Footer = () => {
                 </div>
 
                 {/* Bottom Section - Social Media */}
-                <div className='text-gray-400 pb-2 text-center text-purple-900'>
-                    &copy; 2025 <span className="font-semibold">Flora Play School</span>. All rights reserved.
-                    <span className="px-2">
-                        Build with 💜 by{' '}
+                <div className='text-gray-400 pb-2 px-4 text-center text-purple-900 2xl:text-md md:text-md text-sm flex md:flex-row flex-col'>
+                    <div>&copy; 2025 <span className="font-semibold">Flora Play School</span>. All rights reserved.</div>
+                    <div className='pl-1'>Build with 💜 by{' '}
                         <a
                             className="font-bold"
                             href="https://www.ontopgroups.com"
@@ -87,8 +86,7 @@ const Footer = () => {
                             rel="noopener noreferrer"
                         >
                             Ontop Groups
-                        </a>
-                    </span>
+                        </a></div>
                 </div>
             </footer>
         </div>
