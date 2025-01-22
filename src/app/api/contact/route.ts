@@ -4,7 +4,7 @@ import { transporter, mailOptions } from '../../../utils/nodemailer';
 type FormData = {
     name: string;
     email: string;
-    phone: string;
+    phoneNumber: string;
     message: string;
 }
 
@@ -12,18 +12,18 @@ export async function POST(req: NextRequest) {
     if (req.method === 'POST') {
         const body = await req.json();
         const data: FormData = body;
-
+        
         try {
             const message = `
-                Name: ${data.name}
-                Email: ${data.email}
-                Phone: ${data.phone}
-                Message: ${data.message}
+                Name: ${data?.name}
+                Email: ${data?.email}
+                Phone: ${data?.phoneNumber}
+                Message: ${data?.message}
             `
 
             await transporter.sendMail({
                 ...mailOptions,
-                from: `${data.email}`,
+                from: `${data?.email}`,
                 subject: 'New Contact from website contact form',
                 text: message
             });
